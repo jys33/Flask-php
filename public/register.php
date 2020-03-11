@@ -26,6 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     if ($error == null) {
         Db::query('INSERT INTO user (username, password) VALUES (?, ?)', $username, encryptPassword($password));
+        Flash::addFlash('Te has registrado correctamente, ahora puedes iniciar sesión.');
         header('Location: /login.php');
         exit;
     }
