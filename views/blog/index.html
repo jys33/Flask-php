@@ -1,0 +1,50 @@
+<header>
+    <div
+        class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1 class="h3"><?= $title ?></h1>
+        <?php if(isset($_SESSION['user_id'])): ?>
+        <div class="btn-toolbar mb-2 mb-md-0">
+            <div class="btn-group">
+                <a class="btn btn-sm btn-primary" href="/create.php">Nuevo</a>
+            </div>
+        </div>
+        <?php endif ?>
+    </div>
+</header>
+<?php if ($flashes): ?>
+<?php foreach($flashes as $flash): ?>
+<div class="alert alert-<?= $flash['class'] ?>" role="alert">
+<?= $flash['message'] ?>
+</div>
+<?php endforeach ?>
+<?php endif; ?>
+
+<?php
+$lastArr = end($posts);
+foreach ($posts as $post): ?>
+<section>
+    <div class="row align-items-center mb-3">
+        <div class="col-sm-9">
+            <h3><?= $post['title'] ?></h3>
+            <span class="font-italic"
+                style="color: #dc143c;"><?= 'Por ' . $post['username'] . ' el ' . date('j/n/Y', strtotime($post['created'])) ?></span>
+        </div>
+        <div class="col-sm-3">
+            <?php if(isset($_SESSION['user_id']) && $_SESSION['user_id'] == $post['author_id']): ?>
+            <div class="float-right">
+                <a href="/vote/add/<?= $post['id'] ?>" class="btn btn-success btn-sm"><i
+                        class="material-icons align-bottom" style="font-size: 18px;">thumb_up_alt</i> 3</a>
+                <a href="/update.php?id=<?= $post['id'] ?>" class="btn btn-info btn-sm">editar</i></a>
+
+            </div>
+            <?php endif ?>
+        </div>
+    </div>
+    <div>
+        <p class="text-justify"><?= nl2br($post['body']); ?></p>
+    </div>
+</section>
+<?php if($lastArr != $post): ?>
+<hr>
+<?php endif ?>
+<?php endforeach ?>

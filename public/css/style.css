@@ -1,0 +1,27 @@
+*:hover, *:focus, *:active {
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+html {
+    background-color: #eee;
+    padding: 1rem;
+}
+
+body {
+    background-color: #fff;
+    max-width: 960px;
+    margin: 0 auto;
+}
+
+label {
+    font-weight: 500;
+}
+
+main {
+    font-size: 14px;
+}
+
+.form-control:focus {
+    border-color: #1a73e8;
+}
